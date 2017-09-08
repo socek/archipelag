@@ -4,8 +4,12 @@ services:
 
   backend:
     build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    working_dir: /code/archipelag
     tty: true
     stdin_open: true
+    ports:
+      - 8000:8000
     volumes:
       - ./backend/code:/code
 
