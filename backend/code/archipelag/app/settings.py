@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'archipelag.urls'
+ROOT_URLCONF = 'archipelag.app.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'archipelag.wsgi.application'
+WSGI_APPLICATION = 'archipelag.app.wsgi.application'
 
 
 # Database
