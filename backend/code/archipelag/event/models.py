@@ -11,7 +11,7 @@ CATEGORIES = (
     ('SMS', 'SMS Kiss'),
 )
 
-class EventModel(models.Model):
+class Event(models.Model):
     title  = models.CharField(max_length=120, blank=True, null=False)
     email = models.EmailField(null=False)
     category = models.CharField(max_length=4, choices=CATEGORIES, default='FB')
