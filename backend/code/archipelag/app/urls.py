@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
+from django.views.generic.base import RedirectView
+
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/market/', permanent=False), name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', LoginView.as_view()),
+    url(r'^market/', include('archipelag.market.urls'))
 ]
