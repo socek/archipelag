@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event
+from archipelag.event.models import Event
 
 # Register your models here.
 

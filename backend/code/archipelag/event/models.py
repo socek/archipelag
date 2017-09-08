@@ -20,3 +20,4 @@ class Event(models.Model):
     date_ending = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    shares = models.PositiveIntegerField()
