@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/market/', permanent=False), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', LoginView.as_view()),
-    url(r'^market/', include('archipelag.market.urls'))
+    url(r'^market/', include('archipelag.market.urls')),
+    url('^event/', include('archipelag.event.urls')),
 ]
