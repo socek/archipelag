@@ -18,15 +18,50 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/index.html">Home</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/profil.html">Profil</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>                
+                <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/market.html">Rynek</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/wydarzenie.html">Stworz wydarzenie</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/login.html">Wyloguj</a></li>
-                
+
             </ul>
         </div>
     </nav>
+
+    <div class="container-fluid">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Market</h1>
+                    <hr />
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nazwa organizacji</th>
+                    <th>Tytuł</th>
+                    <th>Tagi</th>
+                    <th>Data dodania</th>
+                    <th>Data wydarzenia</th>
+                    <th>Komentarz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for event in user_events %}
+                        <td class="col-md-1 share">}<button onClick="sendData" type="button" id={{ event.owner.id }} class="btn"> Udostepnij </button></td>
+                    { % endfor %}
+                    
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </html>
+

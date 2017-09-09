@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> {% load bootstrap3 %} {% bootstrap_css %} {% bootstrap_javascript %}
 <html lang="en">
 
 <head>
@@ -12,49 +12,45 @@
 <body>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">Dostępne punkty:</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/index.html">Home</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/profil.html">Profil</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/market.html">Rynek</a></li>
+                <li><a href="/code/archipelag/templates/market.html">Rynek</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/wydarzenie.html">Stworz wydarzenie</a></li>
                 <li><a href="file:///Users/Admin/Desktop/hacksilesia/login.html">Wyloguj</a></li>
+
             </ul>
         </div>
     </nav>
-
     <div class="container-fluid">
-            <div class="row main">
-                <div class="panel-heading">
-                    <div class="panel-title text-center">
-                        <h1 class="title">Moje Wydarzenia</h1>
-                        <hr />
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Stwórz Wydarzenie</h1>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row main">
+                    <div class="main-login main-center col-md-4 col-md-offset-4"
+                     style="font-size:17px" action="/event-add/" method="POST">
+
+                        {% csrf_token %} {% bootstrap_form form %}
+                        
+               
+                    </div>
+                    <div class="form-group col-md-4 col-md-offset-4 ">
+                            <button action="POST" type="button" id="submit"
+                             class="btn btn-primary btn-lg btn-block login-button">Zapisz</button>
                     </div>
                 </div>
             </div>
 
-    <table class="table table-bordered panel panel-primary">
-            <thead class="panel-heading">
-                <tr>
-                    <th>Nazwa organizacji</th>
-                    <th>Tytuł</th>
-                    <th>Tagi</th>
-                    <th>Data dodania</th>
-                    <th>Data wydarzenia</th>
-                    <th>Komentarz</th>
-                </tr>
-            </thead>
-            <tbody>
-                        {% for event in user_events %}
-                        <tr> 
-                            <td> {{% event.title %}} </td> 
-                            <!-- `tutaj podajesz w <td> pola ktora interesuja z eventu </td> -->
-                            <td><button action="{% url "send_event_to_market" %}" type="button" id={{ event.owner.id }} class="btn"> Wyslij na rynek </button></td>  
-                        </tr>
-                        { % endfor %}
-             </tbody>
-        </table>
-    </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
