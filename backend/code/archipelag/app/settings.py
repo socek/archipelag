@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'archipelag.ngo',
     'archipelag.market',
     'archipelag.shared',
+    'archipelag.notification',
 ]
 
 MIDDLEWARE = [
