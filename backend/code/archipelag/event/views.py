@@ -1,14 +1,17 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from archipelag.event.forms import EventForm
-# Create your views here.
+from django.shortcuts import render
 
+from archipelag.event.forms import EventForm
+
+
+@login_required
 def register_event(request):
     if request.method == 'POST':
-        form = EventForm(request.PO)
+        form = EventForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/success/')
+            form.save()
+            return HttpResponseRedirect('/market/')
     else:
         form = EventForm()
     return render(request, 'registration/event.html', {'form': form})
-
