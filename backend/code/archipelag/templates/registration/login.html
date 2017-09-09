@@ -25,8 +25,7 @@
         <div id="content-main">
 
 
-
-  <form action="/admin/login/?next=/admin/" method="post" id="login-form">
+  <form action="{% url "login" %}?next={{ request.GET.next|default:"/" }}" method="post" id="login-form">
     {% csrf_token %}
     <div class="form-row">
       {{ form.username.label_tag }}

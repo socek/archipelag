@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'archipelag.ngo',
     'archipelag.market',
     'bootstrap3',
+    'archipelag.shared',
+    'archipelag.notification',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/market/'
+LOGOUT_REDIRECT_URL = '/'
+BROKER_URL = 'amqp://archipelag:archipelag@rabbitmq:5672/archipelag'
+
+EMAIL_HOST = 'maildump'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
+NOTIFICATION_FROM_EMAIL = 'notification@example.com'
