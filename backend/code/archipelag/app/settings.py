@@ -128,3 +128,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/market/'
+BROKER_URL = 'amqp://archipelag:archipelag@rabbitmq:5672/archipelag'
