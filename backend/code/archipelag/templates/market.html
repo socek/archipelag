@@ -16,12 +16,12 @@
                 <li><a href="#">Dostępne punkty:</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/index.html">Home</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/profil.html">Profil</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/market.html">Rynek</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/wydarzenie.html">Stworz wydarzenie</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/login.html">Wyloguj</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="./profil.html">Profil</a></li>
+                <li><a href="./mojeWydarzenia.html">Moje Wydarzenia</a></li>
+                <li><a href="./market.html">Rynek</a></li>
+                <li><a href="./wydarzenie.html">Stworz wydarzenie</a></li>
+                <li><a href="./login.html">Wyloguj</a></li>
 
             </ul>
         </div>
@@ -51,7 +51,7 @@
             <tbody>
                 <tr>
                     {% for event in user_events %}
-                        <td class="col-md-1 share">}<button onClick="sendData" type="button" id={{ event.owner.id }} class="btn"> Udostepnij </button></td>
+                        <td class="col-md-1 share">}<button type="button" id={{ event.owner.id }} class="btn"> Udostepnij </button></td>
                     { % endfor %}
                     
                 </tr>
