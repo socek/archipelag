@@ -1,8 +1,52 @@
 {% extends "base.html" %}
 {% block body %}
-  <table>
-    <tr>
-        <td>One</td>
-    </tr>
-  </table>
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Market</h1>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nazwa organizacji</th>
+                <th>Tytuł</th>
+                <th>Tagi</th>
+                <th>Data dodania</th>
+                <th>Data wydarzenia</th>
+                <th>Komentarz</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in user_events %}
+                <tr>
+                    <td class="col-md-1">
+                        {{ event.owner.name }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ event.title }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ event.hashtag|default:'' }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ event.date_starting|default:'' }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ event.date_ending|default:'' }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ event.text }}
+                    </td>
+                    <td class="col-md-1 share">
+                        <button type="button" id="{{ event.owner.id }}" class="btn">Udostepnij na FB</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
