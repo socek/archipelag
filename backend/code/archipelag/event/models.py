@@ -13,8 +13,6 @@ CATEGORIES = (
 
 class Event(models.Model):
     title = models.CharField(max_length=120, blank=True, null=False)
-    email = models.EmailField(null=False)
-    category = models.CharField(max_length=4, choices=CATEGORIES, default='FB')
     url = models.URLField(null=True)
     date_starting = models.DateField()
     date_ending = models.DateField()
@@ -26,6 +24,6 @@ class Event(models.Model):
 
 class Shared(models.Model):
     category = models.CharField(max_length=4, choices=CATEGORIES, default='FB')
-    date_shared = models.DateField()
+    date_shared = models.DateField(null=False)
     who_shared = models.ForeignKey(NgoUser)
     hash_tag = models.CharField(max_length=120, null=False)
