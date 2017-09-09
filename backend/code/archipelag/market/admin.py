@@ -1,3 +1,9 @@
-from django.contrib import admin
+from archipelag.market.models import Market
+from django.contrib.admin import ModelAdmin
+from django.contrib.admin import site
 
-# Register your models here.
+
+class MarketAdmin(ModelAdmin):
+    pass
+
+site.register(Market, MarketAdmin)

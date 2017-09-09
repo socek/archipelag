@@ -4,6 +4,7 @@ services:
 
   backend:
     build: ./backend
+    image: archipelag_backend
     command: python manage.py runserver 0.0.0.0:8000
     working_dir: /code/archipelag
     tty: true
@@ -12,6 +13,7 @@ services:
       - 8000:8000
     volumes:
       - ./backend/code:/code
+    env_file: .env
 
   postgres:
     image: postgres:9.4
@@ -23,6 +25,26 @@ services:
       - POSTGRES_USER=archipelag
       - POSTGRES_DB=archipelag
       - PGPASSWORD=archipelag
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    env_file: .env
+
+  maildump:
+    image: ball6847/maildump
+    ports:
+      - 1080:1080
+
+  celery:
+    image: archipelag_backend
+    command: celery -A archipelag worker -l info
+    env_file: .env
+    working_dir: /code/archipelag
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./backend/code:/code
+
 
 volumes:
   postgres-data:
