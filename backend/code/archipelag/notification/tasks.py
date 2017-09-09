@@ -38,7 +38,7 @@ def send_notification(notification_id):
         return
 
     event = notification.event
-    user = notification.user.user
+    user = notification.owner.user
     if not user.email:
         logger.error('Notification object with id {} can not be sent, because user has no email'.format(
             notification_id))
@@ -51,5 +51,7 @@ def send_notification(notification_id):
         [user.email],
         fail_silently=False,
     )
+    notification.sent = True
+    notification.save()
 
     logger.info('Notification id {} sent'.format(notification_id))
