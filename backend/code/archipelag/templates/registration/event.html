@@ -1,8 +1,29 @@
 {% extends "base.html" %}
+{% load bootstrap3 %} {% bootstrap_css %} {% bootstrap_javascript %}
+
 {% block body %}
-  <form class="form-horizontal"  method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" name="submit" class="form-control" />
-  </form>
-{% endblock %}
+<div class="row main">
+    <div class="panel-heading">
+        <div class="panel-title text-center">
+            <h1 class="title">Stwórz Wydarzenie</h1>
+            <hr />
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row main">
+            <div class="main-login main-center col-md-4 col-md-offset-4"
+                style="font-size:17px" action="/event-add/" method="POST">
+
+                {% csrf_token %} {% bootstrap_form form %}
+
+
+            </div>
+            <div class="form-group col-md-4 col-md-offset-4 ">
+                    <button action="POST" type="button" id="submit"
+                        class="btn btn-primary btn-lg btn-block login-button">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

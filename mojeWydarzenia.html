@@ -13,12 +13,12 @@
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/index.html">Home</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/profil.html">Profil</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/market.html">Rynek</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/wydarzenie.html">Stworz wydarzenie</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/login.html">Wyloguj</a></li>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./profil.html">Profil</a></li>
+                <li><a href="./mojeWydarzenia.html">Moje Wydarzenia</a></li>
+                <li><a href="./market.html">Rynek</a></li>
+                <li><a href="./wydarzenie.html">Stworz wydarzenie</a></li>
+                <li><a href="./login.html">Wyloguj</a></li>
             </ul>
         </div>
     </nav>
@@ -33,8 +33,8 @@
                 </div>
             </div>
 
-    <table class="table table-bordered">
-            <thead>
+    <table class="table table-bordered panel panel-primary">
+            <thead class="panel-heading">
                 <tr>
                     <th>Nazwa organizacji</th>
                     <th>Tytuł</th>
@@ -45,32 +45,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                </tr>
-            </tbody>
+                        {% for event in user_events %}
+                        <tr> 
+                            <td> {{% event.title %}} </td> 
+                            <!-- `tutaj podajesz w <td> pola ktora interesuja z eventu </td> -->
+                            <td><button action="{% url "send_event_to_market" %}" type="button" id={{ event.owner.id }} class="btn"> Wyslij na rynek </button></td>  
+                        </tr>
+                        { % endfor %}
+             </tbody>
         </table>
+    </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>

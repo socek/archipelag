@@ -2,3 +2,12 @@ li:hover {
  background-color:#FAEBD7;   
 
 }
+
+.share {
+    text-align:center;
+ }
+
+ .btn {
+    background-color: #3B5998;
+    color:white;
+ }

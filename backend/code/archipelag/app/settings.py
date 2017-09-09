@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'archipelag.event',
     'archipelag.ngo',
     'archipelag.market',
+    'bootstrap3',
     'archipelag.shared',
     'archipelag.notification',
 ]

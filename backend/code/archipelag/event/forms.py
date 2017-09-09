@@ -10,4 +10,6 @@ class EventForm(ModelForm):
         fields = [
             'title',
             'url',
-            'text']
+            'text',
+            'date_starting',
+            'date_ending']

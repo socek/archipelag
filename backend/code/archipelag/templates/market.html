@@ -16,13 +16,13 @@
                 <li><a href="#">Dostępne punkty:</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/index.html">Home</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/profil.html">Profil</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/mojeWydarzenia.html">Moje Wydarzenia</a></li>                
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/market.html">Rynek</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/wydarzenie.html">Stworz wydarzenie</a></li>
-                <li><a href="file:///Users/Admin/Desktop/hacksilesia/login.html">Wyloguj</a></li>
-                
+                <li><a href="/">Home</a></li>
+                <li><a href="./profil.html">Profil</a></li>
+                <li><a href="./mojeWydarzenia.html">Moje Wydarzenia</a></li>
+                <li><a href="./market.html">Rynek</a></li>
+                <li><a href="./wydarzenie.html">Stworz wydarzenie</a></li>
+                <li><a href="./login.html">Wyloguj</a></li>
+
             </ul>
         </div>
     </nav>
@@ -50,33 +50,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
+                    {% for event in user_events %}
+                        <td class="col-md-1 share">}<button type="button" id={{ event.owner.id }} class="btn"> Udostepnij </button></td>
+                    { % endfor %}
+                    
                 </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                </tr>
+    
             </tbody>
         </table>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </html>
+
