@@ -4,21 +4,21 @@ import settings
 
 access_token = 'EAACEdEose0cBAJIjmrjYjeutcglynnIr85vDpflGIiq6bD9qsoNhUzXtqfyLrakZCBt1HC2xZAI0rLdof4OPfqH69ZCswNO11ZCEsDeKxkMN0XDmCZBXZCRFKZCA0jXDN1GzCQP2TxzQ0agisnETR8CFaURRgGnzZB6xGZCoFZAcDDDe7gKHaIZBuTjNTFGuEGvjO9cJHyZCrCspNgZDZD'
 
-def get_posts(access_token, callable):
+def get_posts(access_token, callback):
     graph = facebook.GraphAPI(access_token)
     try:
         profile = graph.get_object('me')
     except:
         # When old token has expired, get new one.
-        new_token = graph.get_app_access_token(settings.APP_ID, APP_SECRET)
-        return get_posts(new_token, callable)
+        new_token = graph.get_app_access_token(settings.APP_ID, settings.APP_SECRET)
+        return get_posts(new_token, callback)
     posts = graph.get_connections(profile['id'], 'posts')
     while True:
         try:
             # Perform some action on each post in the collection we receive from
             # Facebook.
             for post in posts['data']:
-                result = callable(post)
+                result = callback(post)
                 yield result
             # Attempt to make a request to the next page of data, if it exists.
             posts = requests.get(posts['paging']['next']).json()

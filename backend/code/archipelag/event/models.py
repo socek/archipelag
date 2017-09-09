@@ -11,3 +11,6 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     shares = models.PositiveIntegerField()
+    text = models.TextField(max_length=2048, blank=True)
+    owner = models.OneToOneField(NgoUser, null=True)
+    hashtag = models.CharField(max_length=128, default='')
