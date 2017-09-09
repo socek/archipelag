@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head><body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url "market" %}">Targ</a></li>
+        <li><a href="{% url "event_register" %}">Stwórz Wydarzenia</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url "logout" %}">Wyloguj</a></li>
+        {% else %}
+          <li><a href="{% url "login" %}">Zaloguj</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row main">
+      <div class="main-login main-center col-md-2">
+        {% block body %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>
