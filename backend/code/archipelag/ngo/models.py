@@ -5,6 +5,15 @@ from django.db.models import Model
 from django.db.models import OneToOneField
 from django.db.models import PositiveIntegerField
 
+CATEGORIES = (
+    ('FB', 'Facebook'),
+    ('IP', 'Informacja Prasowa'),
+    ('NEWS', 'Newsletter'),
+    ('INST', 'Instagram'),
+    ('TW', 'Twitter'),
+    ('SMS', 'SMS Kiss'),
+)
+
 
 class NgoUser(Model):
     user = OneToOneField(User, on_delete=CASCADE)
@@ -13,4 +22,4 @@ class NgoUser(Model):
     fb_token = CharField(max_length=256, blank=True)
 
     def __str__(self):
-        return str(self.user)   
+        return str(self.user)
