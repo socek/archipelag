@@ -32,6 +32,8 @@ services:
 
   maildump:
     image: ball6847/maildump
+    ports:
+      - 1080:1080
 
   celery:
     image: archipelag_backend

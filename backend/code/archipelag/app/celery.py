@@ -5,7 +5,6 @@ from django.conf import settings
 
 
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'archipelag.app.settings')
-print(settings.INSTALLED_APPS)
 capp = Celery('archipelag')
 capp.config_from_object('django.conf:settings', namespace='CELERY')
 capp.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

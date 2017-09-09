@@ -129,3 +129,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/market/'
 BROKER_URL = 'amqp://archipelag:archipelag@rabbitmq:5672/archipelag'
+
+EMAIL_HOST = 'maildump'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
