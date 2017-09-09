@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.views import View
 
 
 class Market(LoginRequiredMixin, View):
+    template_name = 'market/list.html'
 
     def get(self, request):
-        return HttpResponse('result')
+        return render(
+            request, self.template_name,
+            {})
