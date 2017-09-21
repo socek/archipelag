@@ -14,5 +14,8 @@ RUN pip install -r requirements.txt
 COPY code .
 RUN python setup.py develop
 
+WORKDIR /code/archipelag
+CMD python manage.py runserver 0.0.0.0:8000
+
 EXPOSE 8000
 

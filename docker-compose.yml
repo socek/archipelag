@@ -4,9 +4,7 @@ services:
 
   backend:
     build: ./backend
-    image: archipelag_backend
-    command: python manage.py runserver 0.0.0.0:8000
-    working_dir: /code/archipelag
+    image: hssilesia/archipelag:latest
     tty: true
     ports:
       - 8000:8000
@@ -35,14 +33,13 @@ services:
       - 1080:1080
 
   celery:
-    image: archipelag_backend
+    image: hssilesia/archipelag:latest
     command: celery -A archipelag worker -l info
-    env_file: .env
-    working_dir: /code/archipelag
     tty: true
     stdin_open: true
     volumes:
       - ./backend/code:/code
+    env_file: .env
 
 
 volumes:

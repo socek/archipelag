@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'archipelag.app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'archipelag',
-        'USER': 'archipelag',
-        'PASSWORD': 'archipelag',
-        'HOST': 'postgres',
+        'NAME': os.environ.get('POSTGRES_DB', 'archipelag'),
+        'USER': os.environ.get('POSTGRES_USER', 'archipelag'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'archipelag'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'postgres'),
         'PORT': '',
     }
 }
@@ -132,7 +132,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/market/'
 LOGOUT_REDIRECT_URL = '/'
-BROKER_URL = 'amqp://archipelag:archipelag@rabbitmq:5672/archipelag'
+BROKER_URL = os.environ.get(
+    'CELERY_BROKER_URL',
+    'amqp://archipelag:archipelag@rabbitmq:5672/archipelag',
+)
 
 EMAIL_HOST = 'maildump'
 EMAIL_HOST_USER = ''
