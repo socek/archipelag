@@ -24,7 +24,7 @@ SECRET_KEY = 'q3=#_uwj2(lbo6cp412^#6s@xeux)h^$h&!g&b_1en7hl-%n0p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['archipelag.hs-silesia.pl']
 
 
 # Application definition
