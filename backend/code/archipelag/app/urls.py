@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^market/', include('archipelag.market.urls')),
+    url(r'^message/', include('archipelag.message.urls')),
 ]

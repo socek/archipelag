@@ -22,28 +22,28 @@
             </tr>
         </thead>
         <tbody>
-            {% for event in user_events %}
+            {% for msg in user_messages %}
                 <tr>
                     <td class="col-md-1">
-                        {{ event.owner.name }}
+                        {{ msg.owner.name }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.title }}
+                        {{ msg.title }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.hashtag|default:'' }}
+                        {{ msg.hashtag|default:'' }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.date_starting|default:'' }}
+                        {{ msg.date_starting|default:'' }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.date_ending|default:'' }}
+                        {{ msg.date_ending|default:'' }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.text }}
+                        {{ msg }}
                     </td>
                     <td class="col-md-1 share">
-                        <button type="button" id="{{ event.owner.id }}" class="btn">Udostepnij na FB</button>
+                        <button type="button" id="{{ msg.owner.id }}" class="btn">Udostepnij na FB</button>
                     </td>
                 </tr>
             {% endfor %}
