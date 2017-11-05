@@ -1,8 +1,25 @@
-from django.db import models
-from archipelag.event.models import Event
+from django.db.models import CharField
+from django.db.models import DateField
+from django.db.models import DateTimeField
+from django.db.models import ForeignKey
+from django.db.models import Model
+from django.db.models import TextField
+from django.db.models import URLField
+
+from archipelag.ngo.models import NgoUser
 
 
-class Market(models.Model):
-    event = models.OneToOneField(Event)
-    added_at = models.DateTimeField(auto_now_add=True)
+class Market(Model):
+    owner = ForeignKey(NgoUser)
+    title = CharField(max_length=120, blank=True, null=False)
+    url = URLField(null=True)
+    date_starting = DateField(null=True, blank=True)
+    date_ending = DateField(null=True, blank=True)
+    date_created = DateTimeField(auto_now_add=True)
+    date_modified = DateTimeField(auto_now=True)
+    hashtag = CharField(max_length=15, default='')
 
+
+class Image(Model):
+    market = ForeignKey(Market, null=False)
+    image_path = TextField(max_length=2048, blank=False)

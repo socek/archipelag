@@ -22,10 +22,8 @@ from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='/market/', permanent=False), name='index'),
+    url(r'^$', RedirectView.as_view(url='/admin/', permanent=False), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
-    url(r'^market/', include('archipelag.market.urls')),
-    url(r'^event/', include('archipelag.event.urls')),
 ]
