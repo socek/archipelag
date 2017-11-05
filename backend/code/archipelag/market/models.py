@@ -19,7 +19,13 @@ class Market(Model):
     date_modified = DateTimeField(auto_now=True)
     hashtag = CharField(max_length=15, default='')
 
+    def __str__(self):
+        return str(self.title)
+
 
 class Image(Model):
     market = ForeignKey(Market, null=False)
     image_path = TextField(max_length=2048, blank=False)
+
+    def __str__(self):
+        return str(self.image_path)

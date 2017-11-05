@@ -20,6 +20,8 @@ class EventType(Model):
     type_id = AutoField(primary_key=True)
     name = CharField(max_length=4, choices=TYPES)
 
+    def __str__(self):
+        return str(self.name)
 
 class Event(Model):
     owner = ForeignKey(NgoUser, null=False)
@@ -27,3 +29,5 @@ class Event(Model):
     date_created = DateTimeField(auto_now_add=True)
     content = JSONField(null=False)
 
+    def __str__(self):
+        return str(self.content)[0:10]

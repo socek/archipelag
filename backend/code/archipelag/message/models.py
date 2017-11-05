@@ -22,9 +22,15 @@ class MessageType(models.Model):
     count_hashtag = BooleanField(default=True, blank=True)
     char_restriction = PositiveIntegerField(null=False, blank=True)
 
+    def __str__(self):
+        return self.service
+
 
 class Message(models.Model):
     content = TextField(max_length=2048, blank=True)
-    shared = URLField(null=True)
+    shared = PositiveIntegerField(default=0)
     type = ForeignKey(MessageType, null=False)
     market = ForeignKey(Market, null=False)
+
+    def __str__(self):
+        return str(self.content)[0:25]
