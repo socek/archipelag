@@ -17,6 +17,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url "market" %}">Targ</a></li>
+                <li><a href="{% url "create" %}">Dodaj</a></li>
                 {% if user.is_authenticated %}
                   <li><a href="{% url "logout" %}">Wyloguj</a></li>
                 {% else %}
