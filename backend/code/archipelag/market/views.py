@@ -4,9 +4,9 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from json import loads
+from datetime import datetime
 from archipelag.market.models import Market
-from archipelag.market.forms import MarketForm
 from django.shortcuts import redirect
 
 class MarketView(LoginRequiredMixin, View):
@@ -23,12 +23,17 @@ class MarketView(LoginRequiredMixin, View):
 @login_required
 def market_create(request):
     if request.method == 'POST':
-        form = MarketForm(request.POST)
-        if form.is_valid():
-            market = form.save(commit=False)
-            market.owner = request.user.ngouser
-            market.save()
-            return redirect('/message/create/%s' % market.id)
-    else:
-        form = MarketForm()
-    return render(request, 'registration/event.html', {'form': form})
+        body_unicode = request.body.decode('utf-8')
+        body_data = loads(body_unicode)
+
+        new_market = Market.objects.create(
+            owner=request.user.ngouser,
+            title=body_data["title"],
+            url=body_data["url"],
+            date_starting=body_data["dateFrom"],
+            date_ending=body_data["dateTo"],
+            hashtag = body_data["hashtag"]
+        )
+
+        return HttpResponseRedirect(reverse('message_create', kwargs={'market_id':new_market.id}))
+    return render(request, 'registration/event.html', )

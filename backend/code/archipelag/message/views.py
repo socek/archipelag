@@ -5,7 +5,7 @@ from django.shortcuts import render
 from archipelag.message.forms import MessageForm
 from archipelag.market.models import Market
 #from archipelag.notification.tasks import send_notification_for_event
-
+from django.shortcuts import render_to_response
 
 @login_required
 def message_create(request, market_id):
@@ -19,5 +19,5 @@ def message_create(request, market_id):
             #send_notification_for_event.delay(event.id)
             return HttpResponseRedirect('/market/')
     else:
-        form = MessageForm()
-    return render(request, 'registration/event.html', {'form': form})
+
+        return render_to_response(request, 'registration/message.html')

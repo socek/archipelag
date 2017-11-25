@@ -34,10 +34,10 @@
                         {{ msg.hashtag|default:'' }}
                     </td>
                     <td class="col-md-1">
-                        {{ msg.date_starting|default:'' }}
+                        {{ msg.date_starting|default:''|date:"m.d.Y H:i" }}
                     </td>
                     <td class="col-md-1">
-                        {{ msg.date_ending|default:'' }}
+                        {{ msg.date_ending|default:''|date:"m.d.Y H:i" }}
                     </td>
                     <td class="col-md-1">
                         {{ msg }}
