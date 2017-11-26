@@ -11,14 +11,14 @@ from archipelag.market.models import Market
 
 class MessageType(models.Model):
     CATEGORIES = (
-        ('FB', 'Facebook'),
-        ('IP', 'Informacja Prasowa'),
-        ('NEWS', 'Newsletter'),
-        ('INST', 'Instagram'),
-        ('TW', 'Twitter'),
+        ('Facebook', 'Facebook'),
+        ('Prasa', 'Informacja Prasowa'),
+        ('Newsletter', 'Newsletter'),
+        ('Instagram', 'Instagram'),
+        ('Twitter', 'Twitter'),
         ('SMS', 'SMS Kiss'),
     )
-    service = CharField(max_length=4, choices=CATEGORIES, default='FB')
+    service = CharField(max_length=10, choices=CATEGORIES, default='Facebook')
     count_hashtag = BooleanField(default=True, blank=True)
     char_restriction = PositiveIntegerField(null=False, blank=True)
 
