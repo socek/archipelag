@@ -11,6 +11,7 @@ services:
     volumes:
       - ./backend/code:/code
     env_file: .env
+    links: [postgres]
 
   postgres:
     image: postgres:9.4

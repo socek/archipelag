@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+
 {% block body %}
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
@@ -15,38 +19,51 @@
                 <th>Nazwa organizacji</th>
                 <th>Tytuł</th>
                 <th>Tagi</th>
-                <th>Data dodania</th>
-                <th>Data wydarzenia</th>
-                <th>Komentarz</th>
+                <th>Data rozpoczęcia</th>
+                <th>Data zakończenia</th>
                 <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-            {% for event in user_events %}
+            {% for msg in user_messages %}
                 <tr>
                     <td class="col-md-1">
-                        {{ event.owner.name }}
+                        {{ msg.owner.name }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.title }}
+                        {{ msg.title }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.hashtag|default:'' }}
+                        {{ msg.hashtag|default:'' }}
                     </td>
                     <td class="col-md-1">
-                        {{ event.date_starting|default:'' }}
+                        {{ msg.date_starting|default:''|date:"m.d.Y H:i"}}
                     </td>
                     <td class="col-md-1">
-                        {{ event.date_ending|default:'' }}
-                    </td>
-                    <td class="col-md-1">
-                        {{ event.text }}
+                        {{ msg.date_ending|default:''|date:"m.d.Y H:i"}}
                     </td>
                     <td class="col-md-1 share">
-                        <button type="button" id="{{ event.owner.id }}" class="btn">Udostepnij na FB</button>
+                        <a data-id={{ msg.id }} type="button" href="{% url 'market_details' market_id=msg.id %}"  class="modal_button" class="btn">Udostepnij</a>
                     </td>
                 </tr>
+
             {% endfor %}
         </tbody>
     </table>
+    <!-- Modal for vote-->
+  <div class="modal fade" id="modalInfo" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title-Info">Lista opisów do udostępniania</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+
+      </div>
+    </div>
+  </div>
 {% endblock %}
+
+

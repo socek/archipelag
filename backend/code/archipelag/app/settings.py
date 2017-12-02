@@ -24,7 +24,7 @@ SECRET_KEY = 'q3=#_uwj2(lbo6cp412^#6s@xeux)h^$h&!g&b_1en7hl-%n0p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['archipelag.hs-silesia.pl']
+ALLOWED_HOSTS = ['archipelag.hs-silesia.pl', '127.0.0.1']
 
 
 # Application definition
@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'archipelag.event',
     'archipelag.ngo',
     'archipelag.market',
+    'archipelag.message',
     'bootstrap3',
-    'archipelag.shared',
-    'archipelag.notification',
+    'django_modalview',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +128,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/market/'
@@ -136,6 +139,8 @@ BROKER_URL = os.environ.get(
     'CELERY_BROKER_URL',
     'amqp://archipelag:archipelag@rabbitmq:5672/archipelag',
 )
+
+
 
 EMAIL_HOST = 'maildump'
 EMAIL_HOST_USER = ''

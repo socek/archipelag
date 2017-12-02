@@ -1,30 +1,53 @@
 {% extends "base.html" %}
-{% load bootstrap3 %} {% bootstrap_css %} {% bootstrap_javascript %}
 
 {% block body %}
-<div class="row main">
-    <div class="panel-heading">
-        <div class="panel-title text-center">
-            <h1 class="title">Stwórz Wydarzenie</h1>
-            <hr />
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'js/event_create.js' %}"></script>
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Stwórz Wydarzenie</h1>
+                <hr />
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row main">
+                <form id="event_form" class="main-login main-center col-md-4 col-md-offset-4"
+                    style="font-size:17px">{% csrf_token %}
+                    <div class="md-form">
+                        <label for="form1" class="">Tytuł</label>
+                        <input type="text" id="title" class="form-control" >
+                    </div>
+                    <div class="md-form">
+                        <label for="form1" class="">Url</label>
+                        <input type="text" id="url" class="form-control">
+                    </div>
+                     <div class="md-form">
+                        <label for="form1" class="">Hashtag</label>
+                        <input type="text" id="hashtag" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class='input-group date' id='dpd1'>
+                            <input type='text' class="form-control" onkeydown="return false"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <div class='input-group date' id='dpd2'>
+                            <input type='text' class="form-control" onkeydown="return false"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 col-md-offset-4 ">
+                        <input id="create_event" class="btn btn-primary btn-lg btn-block login-button" value="Zapisz">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="row main">
-            <form class="main-login main-center col-md-4 col-md-offset-4"
-                style="font-size:17px"
-                method="POST">
-
-                {% csrf_token %} {% bootstrap_form form %}
-
-                <div class="form-group col-md-4 col-md-offset-4 ">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Zapisz">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
  {% endblock %}
-
-
