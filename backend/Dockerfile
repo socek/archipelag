@@ -15,7 +15,7 @@ COPY code .
 RUN python setup.py develop
 
 WORKDIR /code/archipelag
-CMD python manage.py runserver 0.0.0.0:8000
+CMD bash migrate-and-run.sh
 
 EXPOSE 8000
 
