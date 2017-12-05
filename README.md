@@ -17,3 +17,9 @@ docker-compose up --build
 ```bash
 docker-compose run --rm backend python manage.py createsuperuser
 ```
+
+#### copy .env file
+
+```bash
+cp .env_example .env
+```

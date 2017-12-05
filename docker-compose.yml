@@ -11,6 +11,8 @@ services:
     volumes:
       - ./backend/code:/code
     env_file: .env
+    environment:
+        - DEBUG=1
     links: [postgres]
 
   postgres:
