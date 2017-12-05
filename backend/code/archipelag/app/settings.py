@@ -22,10 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q3=#_uwj2(lbo6cp412^#6s@xeux)h^$h&!g&b_1en7hl-%n0p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '0') == '1'
 
-ALLOWED_HOSTS = ['archipelag.hs-silesia.pl', '127.0.0.1']
-
+ALLOWED_HOSTS = ['archipelag.hs-silesia.pl', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 
@@ -76,11 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'archipelag.app.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -97,34 +91,17 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -133,14 +110,13 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static-files/'
 LOGIN_REDIRECT_URL = '/market/'
 LOGOUT_REDIRECT_URL = '/'
 BROKER_URL = os.environ.get(
     'CELERY_BROKER_URL',
     'amqp://archipelag:archipelag@rabbitmq:5672/archipelag',
 )
-
-
 
 EMAIL_HOST = 'maildump'
 EMAIL_HOST_USER = ''
