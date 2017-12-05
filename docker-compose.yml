@@ -10,9 +10,10 @@ services:
       - 8000:8000
     volumes:
       - ./backend/code:/code
-    env_file: .env
+    env_file:
+      - .env
     environment:
-        - DEBUG=1
+        - DJANGO_DEBUG=1
     links: [postgres]
 
   postgres:
@@ -42,8 +43,10 @@ services:
     stdin_open: true
     volumes:
       - ./backend/code:/code
-    env_file: .env
-
+    env_file:
+      - .env
+    environment:
+        - DJANGO_DEBUG=1
 
 volumes:
   postgres-data:
