@@ -40,30 +40,31 @@ function getInputValues(){
 };
 
 function isInputHasRequiredFields(requiredFields, testedDict){
+    is_all_required_has_value = false;
 
-    var missingField = "";
     $.each(requiredFields, function( index, value ) {
-      if (testedDict[value] == ""){
-          missingField = value;
+      if (testedDict[value] == "")
+      {
+         console.log("Missing field "+value);
+         is_all_required_has_value =  false;
+         return false;
       }
-          return false;
+      else{
+      is_all_required_has_value = true;
+      }
     });
-    if (missingField == ""){
-        return true;
-    }else{
-        return false;
-    }
+    return is_all_required_has_value;
 
 };
 
 function createEvent(data){
     inputValues = getInputValues()
-
-    requiredFields = ['url', 'hashtag', 'title', 'date_starting',"date_ending"]
+    requiredFields = ['title', 'date_starting',"date_ending"]
     if (isInputHasRequiredFields(requiredFields, inputValues) == true){
         sendInputs();
     }else{
-        alert("Proszę o wypełnienie wszystkich pól.")
+        alert("Proszę o wypełnienie wszystkich pól."+
+              "Wymagana jest data rozpoczęcia i zakończenia, oraz tytuł.")
     }
 
 };
