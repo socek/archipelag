@@ -6,13 +6,31 @@ from django.db.models import OneToOneField
 from django.db.models import PositiveIntegerField
 
 
+
 class NgoUser(Model):
     user = OneToOneField(User, on_delete=CASCADE)
     name = CharField(max_length=100)
-    coins = PositiveIntegerField(default=0)
+    coins = PositiveIntegerField(default=10)
     fb_token = CharField(max_length=256, blank=True)
     twitter_token = CharField(max_length=256, blank=True)
 
     def __str__(self):
         return str(self.user)
 
+    def is_user_can_add_market(self, ngo):
+        from archipelag.market.models import POINTS_RULES
+
+        if ngo.coins >= POINTS_RULES['add_own_market']:
+            return True
+        return False
+
+    def subtract_coins(self, ngo, number_to_subtract):
+        if ngo.coins >= number_to_subtract:
+            ngo.coins -= number_to_subtract
+            ngo.save()
+            return True
+        return False
+
+    def add_coins(self, ngo, number_to_add):
+        ngo.coins += number_to_add
+        ngo.save()

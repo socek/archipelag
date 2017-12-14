@@ -5,9 +5,16 @@ from django.contrib.auth.decorators import login_required
 from json import loads
 from archipelag.market.models import Market
 from archipelag.message.models import Message
-from archipelag.ngo.models import NgoUser
 from django.http import JsonResponse
 from django.shortcuts import redirect
+
+
+POINTS_RULES = dict(
+    for_share=2,
+    share_more_than_three=0.5,
+    create_more_than_three_messages_format=0.5,
+    share_more_than_three_messages_format=0.5,)
+
 
 class MarketView(LoginRequiredMixin, View):
     template_name = 'market/list.html'
@@ -50,7 +57,9 @@ def get_messages(request, market_id):
 
 
 def add_point(request, market_id):
-    current_user = request.user.ngouser
-    current_user.coins +=5
-    current_user.save()
+    from archipelag.ngo.models import NgoUser
+    current_ngo = request.user.ngouser
+    ngo_model = NgoUser()
+    ngo_model.add_coins(current_ngo, POINTS_RULES['for_share'])
+    current_ngo.save()
     return redirect('market_details', market_id=market_id)
