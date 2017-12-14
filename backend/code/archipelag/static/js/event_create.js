@@ -61,7 +61,6 @@ function createEvent(data){
     inputValues = getInputValues()
     console.log(inputValues)
     requiredFields = ['title', 'date_starting',"date_ending"]
-    console.log(isInputHasRequiredFields(requiredFields, inputValues))
     if (isInputHasRequiredFields(requiredFields, inputValues) == true){
         sendInputs();
     }else{
