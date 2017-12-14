@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.views.generic.base import RedirectView
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/market/', permanent=False), name='index'),
@@ -27,5 +28,10 @@ urlpatterns = [
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
     url(r'^market/', include('archipelag.market.urls')),
-    url(r'^event/', include('archipelag.event.urls')),
+    url(r'^message/', include('archipelag.message.urls'), ),
 ]
+
+if not settings.DEBUG:
+    # TODO: implement nginx support in docker-compose
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
