@@ -3,14 +3,15 @@ from django.db.models import CASCADE
 from django.db.models import CharField
 from django.db.models import Model
 from django.db.models import OneToOneField
-from django.db.models import PositiveIntegerField
-
+from django.db.models import DecimalField
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 
 class NgoUser(Model):
     user = OneToOneField(User, on_delete=CASCADE)
     name = CharField(max_length=100)
-    coins = PositiveIntegerField(default=10)
+    coins = DecimalField(max_digits=100, decimal_places=1, default=10.0, validators=[MinValueValidator(Decimal('0.00'))])
     fb_token = CharField(max_length=256, blank=True)
     twitter_token = CharField(max_length=256, blank=True)
 
@@ -25,6 +26,7 @@ class NgoUser(Model):
         return False
 
     def subtract_coins(self, ngo, number_to_subtract):
+        number_to_subtract = Decimal(number_to_subtract)
         if ngo.coins >= number_to_subtract:
             ngo.coins -= number_to_subtract
             ngo.save()
@@ -32,5 +34,5 @@ class NgoUser(Model):
         return False
 
     def add_coins(self, ngo, number_to_add):
-        ngo.coins += number_to_add
+        ngo.coins += Decimal(number_to_add)
         ngo.save()
