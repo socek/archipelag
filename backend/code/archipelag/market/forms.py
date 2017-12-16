@@ -14,8 +14,10 @@ class MarketForm(ModelForm):
             'url',
             'date_starting',
             'date_ending',
-            'hashtag']
-        widgets = {
-            'date_starting': DateTimeInput(attrs={'class': 'date_starting'}),
-            'date_ending': DateTimeInput(attrs={'class': 'date_ending'})
-        }
+            'hashtag',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super(MarketForm, self).__init__(*args, **kwargs)
+        self.fields['url'].required = False
+        self.fields['hashtag'].required = False

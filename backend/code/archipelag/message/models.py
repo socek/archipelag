@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import ForeignKey
 from django.db.models import TextField
-from django.db.models import URLField
 from django.db.models import CharField
 from django.db.models import BooleanField
 from django.db.models import PositiveIntegerField

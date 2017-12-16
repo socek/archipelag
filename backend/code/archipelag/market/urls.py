@@ -6,7 +6,7 @@ from archipelag.market.views import get_messages
 
 urlpatterns = [
     url(r'^$', MarketView.as_view(), name="market"),
-    url(r'^create/', market_create, name="create"),
+    url(r'^create/', market_create, name="market_create"),
     url(r'^details/(?P<market_id>\d+)/$', get_messages, name='market_details'),
 
 ]
