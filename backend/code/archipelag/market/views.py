@@ -14,7 +14,6 @@ from archipelag.message.models import Message
 
 
 class MarketView(LoginRequiredMixin, View):
-
     template_name = 'market/list.html'
 
     def get(self, request):
@@ -28,7 +27,8 @@ class MarketView(LoginRequiredMixin, View):
 @login_required
 def market_create(request):
     if request.method != 'POST':
-        return
+        return render(request, 'registration/event.html')
+
     body_data = loads(request.body.decode('utf-8'))
     if not is_fields_are_valid(body_data):
         error = dict(error="Błąd wewnętrzny. Złe pola.")
@@ -42,7 +42,7 @@ def market_create(request):
     else:
         error = dict(error="Za mało punktów.")
         return JsonResponse(error)
-    return render(request, 'registration/event.html', )
+
 
 
 def is_fields_are_valid(fields):
