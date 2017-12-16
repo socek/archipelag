@@ -6,7 +6,6 @@ from django.db.models import AutoField
 
 from django.contrib.postgres.fields import JSONField
 
-
 from archipelag.ngo.models import NgoUser
 
 

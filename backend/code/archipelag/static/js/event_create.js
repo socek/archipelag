@@ -85,7 +85,14 @@ function sendInputs(){
                         //but ajax recognize redirect method from django as
                         //response data, so instead
                         //rediredct to expected page we get html here
-                        window.location.href = data['url'];
+                        if(data.hasOwnProperty('error'))
+                        {
+                            alert(data["error"]);
+                        }
+                        else
+                        {
+                            window.location.href = data['url'];
+                        }
                 	},
 				error:function( xhr,textStatus,err)
 					{
