@@ -1,23 +1,32 @@
 from django.db.models import CharField
-from django.db.models import DateField
 from django.db.models import DateTimeField
 from django.db.models import ForeignKey
 from django.db.models import Model
 from django.db.models import PositiveIntegerField
-from django.db.models import TextField
-from django.db.models import URLField
+from django.contrib.postgres.fields import JSONField
 
 from archipelag.ngo.models import NgoUser
 
+SHARE = "SH"
+ADMIN_PROMOTE = "AP"
+REGISTER_FROM_INV = "RI"
+REGISTER = "R"
+EVENT_TYPES = (
+    (SHARE, 'SHARE'),
+    (ADMIN_PROMOTE, 'ADMIN PROMOTE'),
+    (REGISTER_FROM_INV, 'REGISTER FROM INVITATION'),
+    (REGISTER, 'REGISTER'),
+)
+
 
 class Event(Model):
-    title = CharField(max_length=120, blank=True, null=False)
-    url = URLField(null=True)
-    date_starting = DateField(null=True, blank=True)
-    date_ending = DateField(null=True, blank=True)
-    created_at = DateTimeField(auto_now_add=True)
-    modified_at = DateTimeField(auto_now=True)
-    shares = PositiveIntegerField(null=True, blank=True)
-    text = TextField(max_length=2048, blank=True)
     owner = ForeignKey(NgoUser, null=False)
-    hashtag = CharField(max_length=128, default='')
+    type = CharField(max_length=2, choices=EVENT_TYPES, default=SHARE, null=False)
+    date_created = DateTimeField(auto_now_add=True)
+    id_connected_object = PositiveIntegerField(null=True)
+
+    def __str__(self):
+        return "event type {} for id {}".format(self.type, self.id_connected_object)
+
+    def get_share_log(self):
+        return "Użytkownik {} udostępnił to wydarzenie {}".format(self.owner.name, self.date_created)

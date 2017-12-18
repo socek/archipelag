@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 
 <html lang="en-us" >
 <head>
   <title>Archipelag - Log in</title>
-  <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
-  <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />
   <meta name="robots" content="NONE,NOARCHIVE" />
 </head>
 
@@ -15,7 +16,7 @@
       <!-- Header -->
       <div id="header">
           <div id="branding">
-            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+            <h1 id="site-name"><a href="/admin/">Zaloguj się</a></h1>
           </div>
       </div>
       <!-- END Header -->
@@ -28,11 +29,11 @@
   <form action="{% url "login" %}?next={{ request.GET.next|default:"/" }}" method="post" id="login-form">
     {% csrf_token %}
     <div class="form-row">
-      {{ form.username.label_tag }}
+      Nazwa użytkownika
       {{ form.username }}
     </div>
     <div class="form-row">
-      {{ form.password.label_tag }}
+      Hasło
       {{ form.password }}
     </div>
 
