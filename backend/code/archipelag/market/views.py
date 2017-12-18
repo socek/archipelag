@@ -11,6 +11,7 @@ from archipelag.market.settings import POINTS_RULES
 from archipelag.market.models import Market
 from archipelag.market.forms import MarketForm
 from archipelag.message.models import Message
+from archipelag.event.models import Event
 
 
 class MarketView(LoginRequiredMixin, View):
@@ -31,7 +32,7 @@ def market_create(request):
 
     body_data = loads(request.body.decode('utf-8'))
     if not is_fields_are_valid(body_data):
-        error = dict(error="Błąd wewnętrzny. Złe pola.")
+        error = dict(error="Błędny url.")
         return JsonResponse(error)
     current_ngo = request.user.ngouser
     if current_ngo.is_user_can_add_market():
@@ -42,7 +43,6 @@ def market_create(request):
     else:
         error = dict(error="Za mało punktów.")
         return JsonResponse(error)
-
 
 
 def is_fields_are_valid(fields):
@@ -63,10 +63,25 @@ def get_new_market(current_ngo, body_data):
 
 
 def get_messages(request, market_id):
+
     market = Market.objects.filter(id=market_id)
+    messages = Message.objects.filter(market=market_id).all()
+    logs = []
+
+
     template_name = 'market/message_list.html'
     return render(
             request, template_name,
             {
                 'messages': Message.objects.filter(market=market).all(),
+                'logs': get_logs(messages)
             })
+
+
+def get_logs(messages):
+    for message in messages:
+        events = Event.objects.filter(id_connected_object=message.id).all()
+        if events:
+            for event in events:
+                date_created = event.date_created.strftime("%Y-%m-%d %H:%M")
+                yield "Użytkownik {} udostępnił na {} dnia {}".format(event.owner, message.type, date_created)

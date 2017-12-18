@@ -2,31 +2,31 @@ from django.db.models import CharField
 from django.db.models import DateTimeField
 from django.db.models import ForeignKey
 from django.db.models import Model
-from django.db.models import AutoField
-
+from django.db.models import PositiveIntegerField
 from django.contrib.postgres.fields import JSONField
 
 from archipelag.ngo.models import NgoUser
 
+SHARE = "SH"
+ADMIN_PROMOTE = "AP"
+REGISTER_FROM_INV = "RI"
+REGISTER = "R"
+EVENT_TYPES = (
+    (SHARE, 'SHARE'),
+    (ADMIN_PROMOTE, 'ADMIN PROMOTE'),
+    (REGISTER_FROM_INV, 'REGISTER FROM INVITATION'),
+    (REGISTER, 'REGISTER'),
+)
 
-class EventType(Model):
-    TYPES = (
-        ('SH', 'SHARE'),
-        ('AP', 'ADMIN PROMOTE'),
-        ('RI', 'REGISTER FROM INVITATION'),
-        ('R', 'REGISTER'),
-    )
-    type_id = AutoField(primary_key=True)
-    name = CharField(max_length=4, choices=TYPES)
-
-    def __str__(self):
-        return str(self.name)
 
 class Event(Model):
     owner = ForeignKey(NgoUser, null=False)
-    type = ForeignKey(EventType, null=False)
+    type = CharField(max_length=2, choices=EVENT_TYPES, default=SHARE, null=False)
     date_created = DateTimeField(auto_now_add=True)
-    content = JSONField(null=False)
+    id_connected_object = PositiveIntegerField(null=True)
 
     def __str__(self):
-        return str(self.content)[0:10]
+        return "event type {} for id {}".format(self.type, self.id_connected_object)
+
+    def get_share_log(self):
+        return "Użytkownik {} udostępnił to wydarzenie {}".format(self.owner.name, self.date_created)
